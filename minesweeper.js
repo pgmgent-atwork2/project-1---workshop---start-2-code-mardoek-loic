@@ -34,7 +34,16 @@
             //we got everything, let us return it all the way to our html-page
             return minefield;
 
+            //Creates an array of 5 random numbers between 0 and 15
     }, generateMines(){
+        var output = []
+        while (i<5) {
+        var number =  Math.floor(Math.random()*16)
+        
+        output =+ [number]
+        }
+        return output
+        
 
     }   ,
         generateMineField(){
