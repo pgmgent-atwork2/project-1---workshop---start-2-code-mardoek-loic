@@ -37,13 +37,11 @@
             //Creates an array of 5 random numbers between 0 and 15
     }, generateMines(){
         var output = []
-        while (i<5) {
-        var number =  Math.floor(Math.random()*16)
-        
-        output =+ [number]
+        for (let i = 0; i < 5; i++) {
+            const number = Math.floor(Math.random()*15)+1
+            output.push(number)    
         }
         return output
-        
 
     }   ,
         generateMineField(){
@@ -67,3 +65,5 @@
     };
         app.initialize();
 })();
+
+console.log(generateMines)
