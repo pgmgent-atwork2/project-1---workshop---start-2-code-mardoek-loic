@@ -1,23 +1,11 @@
 (() => {
     const app = {
-        //1. Application started!
         initialize() {
-        
-        this.cacheElements();
-        this.buildUI();
+    },
+        cacheElements() {     
         
     },
-        //2. Cache all existing DOM elements!);
-        cacheElements() {
-            GRID_HEIGHT = 4;
-            GRID_WIDTH = 4;
-            MINES_COUNT = 5;
 
-            this.$minesweepergrid = document.getElementById("minesweeper-grid");
-            
-        
-    },
-        //3. Build the user interface!
         buildUI() {
             this.$minesweepergrid.innerHTML = this.generateHTMLForMinesweeperGrid();
             this.registerListeners();
