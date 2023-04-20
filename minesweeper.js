@@ -71,18 +71,74 @@
             $tiles = document.querySelectorAll(".tile");
             console.log($tiles);
             
-            
+            isGameOver = false;
             for (const $tile of $tiles) {
                 $tile.addEventListener('click', (e) => {
                     //check if mine or not
                         console.log(e.target.id);
                         console.log(mines);
-                        if(mines.includes(e.target.id))
-                    //if true, end the game
-                        $tile.style.backgroundColor = "red";
+                        console.log(mines.includes(parseInt(e.target.id)));
+                        
+                        if(mines.includes(parseInt(e.target.id)) && (isGameOver === false)){
+                            //if true, end the game
+                            $tile.style.backgroundColor = "red";
+                            isGameOver = true;
+                            setTimeout(()=>{
+                                alert("You lost! Refresh your page to start again.");
+                            }, 100)
+                        }
+                        else if((isGameOver === false)){
+                            $tile.style.backgroundColor = "green";
+                            $tile.innerHTML = countSurroundingMines(e.target.id);
+                        }
+                    
+                        // $tile.style["background-color"] = "red";
+                        
                     //if false, assign number
                 })
             }
+    }, countSurroundingMines(tileId){
+        let amountOfMines = 0;
+        switch(tileId){
+            //TOPLEFT
+                case 0:
+                    if(this.isMine(0*GRID_WIDTH+1)){
+                        amountOfMines++;
+                    }
+                    if(this.isMine(1*GRID_WIDTH+0)){
+                        amountOfMines++;
+                    }
+                    if(this.isMine(1*GRID_WIDTH+1)){
+                        amountOfMines++;
+                    }
+            //TOPRIGHT
+                    case (GRID_WIDTH-1):
+                        if(this.isMine(0*GRID_WIDTH-1)){
+                            amountOfMines++;
+                        }
+                        if(this.isMine(1*GRID_WIDTH-1)){
+                            amountOfMines++;
+                        }
+                        if(this.isMine(1*GRID_WIDTH)){
+                            amountOfMines++;
+                        }
+            //TOPMIDDLE
+
+            //LEFTMIDDLE
+
+            //RIGHTMIDDLE
+
+            //MIDDLE
+
+            //BOTTOMLEFT
+
+            //BOTTOMRIGHT
+
+            //BOTTOMMIDDLE
+        }
+    },
+    isMine(id){
+        return mines.includes(id)?true:false;
     }
     };
         app.initialize();
