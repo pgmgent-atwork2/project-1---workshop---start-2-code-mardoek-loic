@@ -20,6 +20,7 @@
         //3. Build the user interface!
         buildUI() {
             this.$minesweepergrid.innerHTML = this.generateHTMLForMinesweeperGrid();
+            this.registerListeners();
     },
         generateHTMLForMinesweeperGrid() {
             //let us generate 5 random numbers and save em to an array (different numbers between 0 and 15)
@@ -29,7 +30,7 @@
             minefield = this.generateMineField();
 
             //let us add eventlisteners to the tiles
-            this.registerListeners();
+            //this.registerListeners();
 
             //we got everything, let us return it all the way to our html-page
             return minefield;
@@ -54,20 +55,32 @@
             for (let i = 0; i< GRID_WIDTH; i++) {
                 for (let j = 0; j < GRID_HEIGHT; j++) {
                     output += `
-                    <div class="tile" id="tile${(i*4)+j}">
-                        ${(mines.includes((i*4)+j))?"Death":""}
+                    <div class="tile" id="tile${(i*GRID_WIDTH)+j}">
+                        ${(mines.includes((i*GRID_WIDTH)+j))?"Death":""}
                     </div>
                     `
                     //whenever the *tile-number* (formula = 4 times the outerloop + the innerloop) corresponds with a value in the array, we add a way of telling it is a mine
                     
-                        console.log((i*4)+j)
                 }
                 
             }
             return output;
     },        
         registerListeners() {
-        
+            console.log("test1");
+            $tiles = document.querySelectorAll(".tile");
+            console.log($tiles);
+            
+            
+            for (const $tile of $tiles) {
+                $tile.addEventListener('click', (e) => {
+                    //check if mine or not
+
+                    //if true, end the game
+
+                    //if false, assign number
+                })
+            }
     }
     };
         app.initialize();
