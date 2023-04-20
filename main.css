@@ -1,4 +1,38 @@
+body{
+    background-color: beige;
+}
+
 .wrapper{
     max-width: 33.75rem;
     margin: 0 auto;
+}
+
+.wrapper--tutorial{
+    max-width: 50rem;
+    margin: 0 auto;
+    padding-left: 3rem;
+    background-color: hsl(60, 27%, 71%);
+}
+
+.step__item{
+    display: flex;
+    flex-direction: row;
+}
+
+.step__item--text{
+    display: flex;
+    flex-direction: column;
+}
+
+.step__item--sentence{
+    width: 40rem;
+    margin-left: 2rem;
+}
+
+.step{
+    margin-top: 3rem;
+}
+
+img{
+    max-width: 60rem;
 }
