@@ -1,9 +1,14 @@
 (() => {
     const app = {
         initialize() {
+            this.cacheElements();
+            this.buildUI();
     },
         cacheElements() {     
-        
+            GRID_HEIGHT = 4;
+            GRID_WIDTH = 4;
+            MINES_COUNT = 5;
+            this.$minesweepergrid = document.querySelector("#minesweeper-grid");
     },
 
         buildUI() {
@@ -74,10 +79,7 @@
                             $tile.style.backgroundColor = "green";
                             $tile.innerHTML = this.countSurroundingMines(e.target.id);
                         }
-                    
-                        // $tile.style["background-color"] = "red";
-                        
-                    //if false, assign number
+
                 })
             }
     }, countSurroundingMines(tileId){
