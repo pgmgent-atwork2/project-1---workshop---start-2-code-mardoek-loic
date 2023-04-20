@@ -24,7 +24,7 @@
     },
         generateHTMLForMinesweeperGrid() {
             //let us generate 5 random numbers and save em to an array (different numbers between 0 and 15)
-            // mines = this.generateMines();
+            mines = this.generateMines();
 
             //let us generate 16 tiles, a.k.a. a 4x4 grid, if the tilenumber corresponds with our "mines"-array, we insert a mine
             minefield = this.generateMineField();
@@ -55,7 +55,7 @@
             for (let i = 0; i< GRID_WIDTH; i++) {
                 for (let j = 0; j < GRID_HEIGHT; j++) {
                     output += `
-                    <div class="tile" id="tile${(i*GRID_WIDTH)+j}">
+                    <div class="tile" id="${(i*GRID_WIDTH)+j}">
                         ${(mines.includes((i*GRID_WIDTH)+j))?"Death":""}
                     </div>
                     `
@@ -75,9 +75,11 @@
             for (const $tile of $tiles) {
                 $tile.addEventListener('click', (e) => {
                     //check if mine or not
-
+                        console.log(e.target.id);
+                        console.log(mines);
+                        if(mines.includes(e.target.id))
                     //if true, end the game
-
+                        $tile.style.backgroundColor = "red";
                     //if false, assign number
                 })
             }
