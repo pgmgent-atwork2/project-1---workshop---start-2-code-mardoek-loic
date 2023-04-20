@@ -67,17 +67,12 @@
             return output;
     },        
         registerListeners() {
-            console.log("test1");
             $tiles = document.querySelectorAll(".tile");
-            console.log($tiles);
             
             isGameOver = false;
             for (const $tile of $tiles) {
                 $tile.addEventListener('click', (e) => {
                     //check if mine or not
-                        console.log(e.target.id);
-                        console.log(mines);
-                        console.log(mines.includes(parseInt(e.target.id)));
                         
                         if(mines.includes(parseInt(e.target.id)) && (isGameOver === false)){
                             //if true, end the game
@@ -89,7 +84,7 @@
                         }
                         else if((isGameOver === false)){
                             $tile.style.backgroundColor = "green";
-                            $tile.innerHTML = countSurroundingMines(e.target.id);
+                            $tile.innerHTML = this.countSurroundingMines(e.target.id);
                         }
                     
                         // $tile.style["background-color"] = "red";
@@ -111,6 +106,7 @@
                     if(this.isMine(1*GRID_WIDTH+1)){
                         amountOfMines++;
                     }
+                    break;
             //TOPRIGHT
                     case (GRID_WIDTH-1):
                         if(this.isMine(0*GRID_WIDTH-1)){
@@ -121,21 +117,137 @@
                         }
                         if(this.isMine(1*GRID_WIDTH)){
                             amountOfMines++;
+                            
                         }
+                        break;
             //TOPMIDDLE
-
+                        case tileId > 0 && tileId < (GRID_WIDTH - 1):
+                            if(this.isMine(tileId + 1)){
+                                amountOfMines++;
+                            }
+                            if(this.isMine(tileId - 1)){
+                                amountOfMines++;
+                            }
+                            if(this.isMine(tileId + 1 + GRID_WIDTH)){
+                                amountOfMines++;
+                            }
+                            if(this.isMine(tileId - 1 + GRID_WIDTH)){
+                                amountOfMines++;
+                            }
+                            if(this.isMine(tileId + GRID_WIDTH)){
+                                amountOfMines++;
+                            }
+                            break;
             //LEFTMIDDLE
-
+            case tileId > 0 && tileId < (GRID_WIDTH - 1) && (tileId % GRID_WIDTH) === 0:
+                if(this.isMine(tileId + 1)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId - GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId + 1 - GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId + 1 + GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId + GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                break;
             //RIGHTMIDDLE
-
-            //MIDDLE
-
+                case tileId > (GRID_WIDTH-1) && tileId < (GRID_WIDTH * GRID_HEIGHT - 1) && (tileId + 1 % GRID_WIDTH) === 0:
+                    if(this.isMine(tileId + 1)){
+                        amountOfMines++;
+                    }
+                    if(this.isMine(tileId - GRID_WIDTH)){
+                        amountOfMines++;
+                    }
+                    if(this.isMine(tileId + 1 - GRID_WIDTH)){
+                        amountOfMines++;
+                    }
+                    if(this.isMine(tileId + 1 + GRID_WIDTH)){
+                        amountOfMines++;
+                    }
+                    if(this.isMine(tileId + GRID_WIDTH)){
+                        amountOfMines++;
+                    }
+                    break;
+            
+            
             //BOTTOMLEFT
-
+            case (GRID_WIDTH * (GRID_HEIGHT - 1)):
+                if(this.isMine((GRID_WIDTH * (GRID_HEIGHT - 2)))){
+                    amountOfMines++;
+                }
+                if(this.isMine(GRID_WIDTH * (GRID_HEIGHT - 2) + 1)){
+                    amountOfMines++;
+                }
+                if(this.isMine((GRID_WIDTH * GRID_HEIGHT - 1) + 1)){
+                    amountOfMines++;
+                }
+                break;
             //BOTTOMRIGHT
-
+            case ((GRID_WIDTH * GRID_HEIGHT) - 1):
+                if(this.isMine((GRID_WIDTH * (GRID_HEIGHT - 1) - 1 ))){
+                    amountOfMines++;
+                }
+                if(this.isMine(GRID_WIDTH * (GRID_HEIGHT - 1) - 2)){
+                    amountOfMines++;
+                }
+                if(this.isMine(((GRID_WIDTH * GRID_HEIGHT) - 1) - 1)){
+                    amountOfMines++;
+                }
+                break;
             //BOTTOMMIDDLE
+            case tileId > (GRID_WIDTH * (GRID_HEIGHT - 1)) && tileId < (GRID_WIDTH * GRID_HEIGHT - 1):
+                if(this.isMine(tileId + 1)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId - 1)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId + 1 + GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId - 1 + GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                if(this.isMine(tileId + GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                break;
+                //MIDDLE
+                default:
+                    if(this.isMine(tileId + 1)){
+                    amountOfMines++;
+                    }
+                    if(this.isMine(tileId - 1)){
+                    amountOfMines++;
+                }
+                    if(this.isMine(tileId - GRID_WIDTH - 1)){
+                    amountOfMines++;
+                }
+                    if(this.isMine(tileId - GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                    if(this.isMine(tileId - GRID_WIDTH + 1)){
+                    amountOfMines++;
+                }
+                    if(this.isMine(tileId + GRID_WIDTH - 1)){
+                    amountOfMines++;
+                }
+                    if(this.isMine(tileId + GRID_WIDTH)){
+                    amountOfMines++;
+                }
+                    if(this.isMine(tileId + GRID_WIDTH + 1)){
+                    amountOfMines++;
+                }
+                    break;
         }
+        console.log(amountOfMines);
+        return amountOfMines;
     },
     isMine(id){
         return mines.includes(id)?true:false;
